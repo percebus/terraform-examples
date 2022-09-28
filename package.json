@@ -9,6 +9,9 @@
     "prebrew:tap:hashicorp:install": "npm run brew update && npm run brew tap hashicorp/tap",
     "brew:tap:hashicorp:install": "brew install hashicorp/tap/terraform",
     "brew:install": "npm run brew:tap:hashicorp:install",
+    "prebower:install": "bower update",
+    "bower:install": "bower install",
+    "postinstall": "npm run bower:install",
     "setup:osx": "npm run brew:install",
     "test": "exit 0"
   },
