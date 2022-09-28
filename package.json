@@ -1,0 +1,32 @@
+{
+  "name": "terraform-examples",
+  "version": "0.1.0",
+  "description": "terraform examples",
+  "main": "index.js",
+  "scripts": {
+    "brew:update": "brew update",
+    "brew:tap:hashicorp": "brew tap hashicorp/tap",
+    "prebrew:tap:hashicorp:install": "npm run brew update && npm run brew tap hashicorp/tap",
+    "brew:tap:hashicorp:install": "brew install hashicorp/tap/terraform",
+    "brew:install": "npm run brew:tap:hashicorp:install",
+    "setup:osx": "npm run brew:install",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/percebus/terraform-examples.git"
+  },
+  "keywords": [
+    "terraform",
+    "microsoft",
+    "azure",
+    "amazon",
+    "aws"
+  ],
+  "author": "percebus",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/percebus/terraform-examples/issues"
+  },
+  "homepage": "https://github.com/percebus/terraform-examples#readme"
+}
