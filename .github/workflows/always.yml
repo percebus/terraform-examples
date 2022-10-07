@@ -46,7 +46,7 @@ jobs:
       # FIXME 'source' not available in windows
       # (not cygwin)
       # - name: setup terraform@windows
-      # run: source scripts/terraform/setup/windows/amd64.ba.sh
+      # run: source scripts/terraform/setup/windows/amd64.src.sh
       # - name: terraform validate
       #   run: terraform validate
       # - name: terraform init
@@ -72,7 +72,7 @@ jobs:
         run: npm ci
 
       - name: setup terraform@windows
-        run: source scripts/terraform/setup/darwin/amd64.ba.sh
+        run: source scripts/terraform/setup/darwin/amd64.src.sh
       - name: terraform validate
         run: terraform validate
       - name: terraform init
