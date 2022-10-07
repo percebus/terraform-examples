@@ -1,6 +1,8 @@
 
 errors=0
 
+set -e
+
 os=${1} # windows/darwin
 echo "os: ${os}"
 if test -z "${os}"; then
@@ -30,8 +32,15 @@ target_folder='.bin'
 target_bin_file='terraform'
 target="${target_folder}/terraform"
 
+set -x
 mkdir -p .bin/
 cp ${src} ${target}
+set +x
 
 export PATH=${target_folder}:${PATH}
+
+set -x
 terraform --version
+set +x
+
+set +e
