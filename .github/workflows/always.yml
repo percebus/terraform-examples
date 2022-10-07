@@ -4,6 +4,7 @@ on:
 
 env:
   NODE_VERSION: "16.X"
+  TERRAFORM_CLI_OPTS: "input=false"
 
 jobs:
   verify:
@@ -88,7 +89,9 @@ jobs:
 
       - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
         run: source scripts/terraform/setup.src.sh
+      #
+      # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
-        run: .bin/terraform init
+        run: .bin/terraform init ${TERRAFORM_CLI_OPTS}
       - name: terraform validate
-        run: .bin/terraform validate
+        run: .bin/terraform validate ${TERRAFORM_CLI_OPTS}
