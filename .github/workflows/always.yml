@@ -56,10 +56,10 @@ jobs:
       # (not cygwin)
       # - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
       #   run: source scripts/terraform/setup.src.sh
-      # - name: terraform validate
-      #   run: terraform validate
       # - name: terraform init
       #   run: terraform init
+      # - name: terraform validate
+      #   run: terraform validate
 
 
   verify-macOS-amd64:
@@ -88,7 +88,7 @@ jobs:
 
       - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
         run: source scripts/terraform/setup.src.sh
-      - name: terraform validate
-        run: .bin/terraform validate
       - name: terraform init
         run: .bin/terraform init
+      - name: terraform validate
+        run: .bin/terraform validate
