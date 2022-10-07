@@ -24,6 +24,9 @@ jobs:
       - name: npm install
         run: npm ci
 
+      - name: lint
+        run: npm run lint
+
 
   build-windows-amd64:
     name: Build @ windows:amd64
@@ -42,6 +45,9 @@ jobs:
         run: npm run setup:ci --if-present
       - name: npm install
         run: npm ci
+
+      - name: lint
+        run: npm run lint
 
       # FIXME 'source' not available in windows
       # (not cygwin)
@@ -70,6 +76,9 @@ jobs:
         run: npm run setup:ci --if-present
       - name: npm install
         run: npm ci
+
+      - name: lint
+        run: npm run lint
 
       - name: setup terraform@windows
         run: source scripts/terraform/setup/darwin/amd64.src.sh
