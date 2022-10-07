@@ -54,12 +54,11 @@ jobs:
 
       # FIXME 'source' not available in windows
       # (not cygwin)
-      # - name: setup terraform@windows
-      # run: source scripts/terraform/setup.src.sh
-      # - name: terraform validate
-      #   run: terraform validate
-      # - name: terraform init
-      #   run: terraform init
+      # - name: terraform init @ ${{ env.OS }}:${{ env.ARCH }}
+      #   run: |
+      #     source scripts/terraform/setup.src.sh
+      #     terraform validate
+      #     terraform init
 
 
   build-macOS-amd64:
@@ -86,9 +85,8 @@ jobs:
       - name: lint
         run: npm run lint
 
-      - name: setup terraform@windows
-        run: source scripts/terraform/setup.src.sh
-      - name: terraform validate
-        run: terraform validate
-      - name: terraform init
-        run: terraform init
+      - name: terraform init @ ${{ env.OS }}:${{ env.ARCH }}
+        run: |
+          source scripts/terraform/setup.src.sh
+          terraform validate
+          terraform init
