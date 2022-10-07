@@ -31,6 +31,9 @@ jobs:
   build-windows-amd64:
     name: Build @ windows:amd64
     runs-on: windows-latest
+    env:
+      OS: windows
+      ARCH: amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -52,7 +55,7 @@ jobs:
       # FIXME 'source' not available in windows
       # (not cygwin)
       # - name: setup terraform@windows
-      # run: source scripts/terraform/setup/windows/amd64.src.sh
+      # run: source scripts/terraform/setup.src.sh
       # - name: terraform validate
       #   run: terraform validate
       # - name: terraform init
@@ -62,6 +65,9 @@ jobs:
   build-macOS-amd64:
     name: Build @ macOS:amd64
     runs-on: macos-latest
+    env:
+      OS: darwin
+      ARCH: amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -81,7 +87,7 @@ jobs:
         run: npm run lint
 
       - name: setup terraform@windows
-        run: source scripts/terraform/setup/darwin/amd64.src.sh
+        run: source scripts/terraform/setup.src.sh
       - name: terraform validate
         run: terraform validate
       - name: terraform init

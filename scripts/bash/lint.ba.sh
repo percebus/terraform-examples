@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-printf "\n\nbash validating *.(.ba).sh files"
+echo "bash validating *.(.ba).sh files..."
 
 FOLDER='./scripts'
 find ${FOLDER} -name "*.sh"

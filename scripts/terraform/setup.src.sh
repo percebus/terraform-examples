@@ -3,15 +3,17 @@ errors=0
 
 set -e
 
-os=${1} # windows/darwin
-echo "os: ${os}"
+# os=${1}
+os=${OS}
+echo "os: ${os}" # windows|darwin
 if test -z "${os}"; then
   echo "ERROR: os is empty!"
   ((errors=errors+1))
 fi
 
-arch=${2} # 386/amd64
-echo "arch: ${arch}"
+# arch=${2}
+arch=${ARCH}
+echo "arch: ${arch}" # 386|amd64|arm64
 if test -z "${arch}"; then
   echo "ERROR: arch is empty!"
   ((errors=errors+1))
@@ -38,6 +40,7 @@ cp ${src} ${target}
 chmod +x ${target}
 set +x
 
+# This is why this file needs to be invoked w/ `source`
 export PATH=${target_folder}:${PATH}
 
 set -x
