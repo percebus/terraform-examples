@@ -15,6 +15,14 @@
     "prebower:install": "bower update",
     "bower:install": "bower install",
     "postinstall": "npm run bower:install",
+    "terraform:fmt": "terraform fmt",
+    "preterraform:validate": "npm run terraform:fmt",
+    "terraform:validate": "terraform validate",
+    "preterraform:init": "npm run terraform:validate",
+    "terraform:init": "terraform init",
+    "lint:sh": "bash scripts/bash/lint.ba.sh",
+    "style": "npm run terraform:fmt",
+    "lint": "npm run lint:sh",
     "test": "exit 0"
   },
   "repository": {
