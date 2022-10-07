@@ -43,9 +43,10 @@ jobs:
       - name: npm install
         run: npm ci
 
-      - name: setup terraform@windows
-        run: source scripts/terraform/setup.ba.sh windows amd64
-
+      # FIXME 'source' not available in windows
+      # (not cygwin)
+      # - name: setup terraform@windows
+      #   run: source scripts/terraform/setup.ba.sh windows amd64
 
   build-macOS-amd64:
     name: Build @ macOS:amd64

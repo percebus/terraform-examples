@@ -35,6 +35,7 @@ target="${target_folder}/terraform"
 set -x
 mkdir -p .bin/
 cp ${src} ${target}
+chmod +x ${target}
 set +x
 
 export PATH=${target_folder}:${PATH}
