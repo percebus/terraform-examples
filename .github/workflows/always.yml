@@ -5,6 +5,9 @@ on:
 env:
   NODE_VERSION: "16.X"
   TF_IN_AUTOMATION: 1
+# TF_TOKEN_<hostname>: TODO?
+# TF_CLOUD_ORGANIZATION: TODO?
+# TF_CLOUD_HOSTNAME: TODO?
   TF_CLI_OPTS: "-input=false"
 
 jobs:
@@ -101,7 +104,7 @@ jobs:
           path: .terraform
 
       - name: terraform validate
-        run: .bin/terraform validate ${{ env.TF_CLI_OPTS }}
+        run: .bin/terraform validate
       # TODO
       # - name: terraform plan
       #   run: .bin/terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
