@@ -97,7 +97,7 @@ jobs:
       - name: Upload .terraform
         uses: actions/upload-artifact@v3
         with:
-          name: terraform-${{ env.OS }}:${{ env.ARCH }}
+          name: terraform-${{ env.OS }}-${{ env.ARCH }}
           path: .terraform
 
       - name: terraform validate
