@@ -4,7 +4,7 @@ on:
 
 env:
   NODE_VERSION: "16.X"
-  TERRAFORM_CLI_OPTS: "input=false"
+  TERRAFORM_CLI_OPTS: "-input=false"
 
 jobs:
   verify:
