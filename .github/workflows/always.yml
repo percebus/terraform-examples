@@ -6,9 +6,9 @@ env:
   NODE_VERSION: "16.X"
 
 jobs:
-  build-osx:
-    name: Build @ macOS
-    runs-on: macOS-latest
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -19,6 +19,37 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: setup
-        run: npm run setup:osx --if-present
+        run: npm run setup:ci --if-present
       - name: npm install
         run: npm ci
+
+  builds:
+    strategy:
+      max-parallel: 6
+      matrix:
+        os:
+          - windows-latest
+          - macOS-latest
+        arch:
+          - amd64
+          # TODO
+          # - arm64
+          # - 386
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: ls
+        run: ls -la
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: setup
+        run: npm run setup:ci --if-present
+      - name: npm install
+        run: npm ci
+      - name: setup terraform@macOS (darwin)
+        if: matrix.os == 'macOS'
+        run: source scripts/terraform/setup.ba.sh darwin amd64
