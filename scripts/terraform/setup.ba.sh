@@ -24,9 +24,9 @@ fi
 
 src_bin_file='index'
 if [ "${os}" = 'windows' ]; then
-  bin_file='index.exe'
+  src_bin_file='index.exe'
 fi
-src="./bower_components/terraform_${os}_${arch}/${bin_file}"
+src="./bower_components/terraform_${os}_${arch}/${src_bin_file}"
 
 target_folder='.bin'
 target_bin_file='terraform'
