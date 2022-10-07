@@ -44,7 +44,7 @@ set +x
 export PATH=${target_folder}:${PATH}
 
 set -x
-terraform --version
+terraform version
 set +x
 
 set +e
