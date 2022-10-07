@@ -34,3 +34,4 @@ mkdir -p .bin/
 cp ${src} ${target}
 
 export PATH=${target_folder}:${PATH}
+terraform --version

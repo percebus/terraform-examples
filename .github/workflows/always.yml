@@ -7,7 +7,7 @@ env:
 
 jobs:
   build:
-    name: Build
+    name: Build @ ubuntu
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -23,20 +23,9 @@ jobs:
       - name: npm install
         run: npm ci
 
-  builds:
-    strategy:
-      max-parallel: 6
-      matrix:
-        os:
-          - windows-latest
-          - macOS-latest
-        arch:
-          - amd64
-          # TODO
-          # - arm64
-          # - 386
-    name: Build
-    runs-on: ubuntu-latest
+  build-windows-amd64:
+    name: Build @ windows:amd64
+    runs-on: windows-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -50,6 +39,24 @@ jobs:
         run: npm run setup:ci --if-present
       - name: npm install
         run: npm ci
-      - name: setup terraform@macOS (darwin)
-        if: matrix.os == 'macOS'
+      - name: setup terraform@windows
+        run: source scripts/terraform/setup.ba.sh windows amd64
+
+  build-macOS-amd64:
+    name: Build @ macOS:amd64
+    runs-on: macOS-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: ls
+        run: ls -la
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: setup
+        run: npm run setup:ci --if-present
+      - name: npm install
+        run: npm ci
+      - name: setup terraform@windows
         run: source scripts/terraform/setup.ba.sh darwin amd64
