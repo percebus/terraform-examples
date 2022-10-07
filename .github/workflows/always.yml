@@ -1,4 +1,4 @@
-name: Verification
+name: CI/CD
 on:
   push:
 
@@ -6,8 +6,8 @@ env:
   NODE_VERSION: "16.X"
 
 jobs:
-  build:
-    name: Build @ ubuntu
+  verify:
+    name: Verify @ ubuntu
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -28,8 +28,8 @@ jobs:
         run: npm run lint
 
 
-  build-windows-amd64:
-    name: Build @ windows:amd64
+  verify-windows-amd64:
+    name: Verify @ windows:amd64
     runs-on: windows-latest
     env:
       OS: windows
@@ -54,15 +54,16 @@ jobs:
 
       # FIXME 'source' not available in windows
       # (not cygwin)
-      # - name: terraform init @ ${{ env.OS }}:${{ env.ARCH }}
-      #   run: |
-      #     source scripts/terraform/setup.src.sh
-      #     terraform validate
-      #     terraform init
+      # - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
+      #   run: source scripts/terraform/setup.src.sh
+      # - name: terraform validate
+      #   run: terraform validate
+      # - name: terraform init
+      #   run: terraform init
 
 
-  build-macOS-amd64:
-    name: Build @ macOS:amd64
+  verify-macOS-amd64:
+    name: Verify @ macOS:amd64
     runs-on: macos-latest
     env:
       OS: darwin
@@ -85,8 +86,9 @@ jobs:
       - name: lint
         run: npm run lint
 
-      - name: terraform init @ ${{ env.OS }}:${{ env.ARCH }}
-        run: |
-          source scripts/terraform/setup.src.sh
-          terraform validate
-          terraform init
+      - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
+        run: source scripts/terraform/setup.src.sh
+      - name: terraform validate
+        run: .bin/terraform validate
+      - name: terraform init
+        run: .bin/terraform init
