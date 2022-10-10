@@ -99,14 +99,16 @@ jobs:
       # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
-      - name: Upload .terraform
-        uses: actions/upload-artifact@v3
-        with:
-          name: terraform-${{ env.OS }}-${{ env.ARCH }}
-          path: .terraform
 
       - name: terraform validate
         run: terraform validate
       # TODO
       # - name: terraform plan
       #   run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+
+      # TODO? 200MB+ !!
+      # - name: Upload .terraform
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: terraform-${{ env.OS }}-${{ env.ARCH }}
+      #     path: .terraform
