@@ -94,11 +94,8 @@ jobs:
       - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
         run: source scripts/terraform/setup.src.sh
       - name: set PATH
-        run: |
-          echo ${{ env.PATH }}
-          echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
-          echo ${{ env.PATH }}
-      #
+        run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
+
       # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
@@ -109,7 +106,7 @@ jobs:
           path: .terraform
 
       - name: terraform validate
-        run: .bin/terraform validate
+        run: terraform validate
       # TODO
       # - name: terraform plan
-      #   run: .bin/terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+      #   run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
