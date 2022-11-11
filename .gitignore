@@ -37,3 +37,4 @@ terraform.rc
 .bin/
 node_modules/
 bower_components/
+dist/
