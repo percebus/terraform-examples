@@ -4,7 +4,6 @@ on:
 
 env:
   NODE_VERSION: "16.X"
-  # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
   TF_IN_AUTOMATION: 1
   # TF_TOKEN_<hostname>: TODO?
   # TF_CLOUD_ORGANIZATION: TODO?
@@ -13,11 +12,11 @@ env:
 
 jobs:
   verify:
-    name: Verify @ ubuntu
     runs-on: ubuntu-latest
     env:
       OS: linux
       ARCH: amd64
+    name: Verify @ ubuntu::${{ env.ARCH }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -41,11 +40,17 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
+      # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
-        run: npm run terraform:validate
+        run: terraform init ${{ env.TF_CLI_OPTS }}
+      - name: terraform validate
+        run: terraform validate
 
       - name: terraform plan
-        run: npm run terraform:plan
+      - name: terraform plan
+        run: |
+          mkdir -p dist
+          terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
       - name: Upload tfplan
         uses: actions/upload-artifact@v3
         with:
@@ -60,11 +65,11 @@ jobs:
       #     path: .terraform
 
   verify-macOS-amd64:
-    name: Verify @ macOS:amd64
     runs-on: macos-latest
     env:
       OS: darwin
       ARCH: amd64
+    name: Verify @ macOS:${{ env.ARCH }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -89,17 +94,22 @@ jobs:
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
       - name: terraform init
-        run: npm run terraform:validate
+        run: terraform init ${{ env.TF_CLI_OPTS }}
+      - name: terraform validate
+        run: terraform validate
 
       - name: terraform plan
-        run: npm run terraform:plan
+      - name: terraform plan
+        run: |
+          mkdir -p dist
+          terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
 
   verify-windows-amd64:
-    name: Verify @ windows:amd64
     runs-on: windows-latest
     env:
       OS: windows
       ARCH: amd64
+    name: Verify @ windows:${{ env.ARCH }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
