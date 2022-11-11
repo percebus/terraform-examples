@@ -60,7 +60,7 @@ jobs:
       # FIXME 'source' not available in windows
       # (not cygwin)
       # - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
-      #   run: source scripts/terraform/setup.src.sh
+      #   run: source scripts/terraform/setup.env.sh
       # - name: terraform init
       #   run: terraform init
       # - name: terraform validate
@@ -91,7 +91,7 @@ jobs:
         run: npm run lint
 
       - name: setup scripts @ ${{ env.OS }}:${{ env.ARCH }}
-        run: source scripts/setup.src.sh
+        run: source scripts/setup.env.sh
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
