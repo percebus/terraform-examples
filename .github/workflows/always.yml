@@ -100,9 +100,8 @@ jobs:
 
       - name: terraform validate
         run: terraform validate
-      # TODO
-      # - name: terraform plan
-      #   run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+      - name: terraform plan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=dist/tfplan
 
       # TODO? 200MB+ !!
       # - name: Upload .terraform
