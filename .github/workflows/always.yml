@@ -5,9 +5,9 @@ on:
 env:
   NODE_VERSION: "16.X"
   TF_IN_AUTOMATION: 1
-# TF_TOKEN_<hostname>: TODO?
-# TF_CLOUD_ORGANIZATION: TODO?
-# TF_CLOUD_HOSTNAME: TODO?
+  # TF_TOKEN_<hostname>: TODO?
+  # TF_CLOUD_ORGANIZATION: TODO?
+  # TF_CLOUD_HOSTNAME: TODO?
   TF_CLI_OPTS: "-input=false"
 
 jobs:
@@ -31,7 +31,6 @@ jobs:
 
       - name: lint
         run: npm run lint
-
 
   verify-windows-amd64:
     name: Verify @ windows:amd64
@@ -65,7 +64,6 @@ jobs:
       #   run: terraform init
       # - name: terraform validate
       #   run: terraform validate
-
 
   verify-macOS-amd64:
     name: Verify @ macOS:amd64

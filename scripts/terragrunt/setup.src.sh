@@ -44,7 +44,7 @@ set +x
 export PATH=${target_folder}:${PATH}
 
 set -x
-terragrunt version
+terragrunt --version
 set +x
 
 set +e
