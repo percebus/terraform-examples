@@ -1,0 +1,13 @@
+# Gopkg.toml example
+#
+# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
+# for detailed Gopkg.toml documentation.
+
+
+[[constraint]]
+  name = "github.com/gruntwork-io/terratest"
+  version = "0.9.15"
+
+[prune]
+  go-tests = true
+  unused-packages = true
