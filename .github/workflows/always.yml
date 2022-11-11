@@ -16,7 +16,7 @@ jobs:
     env:
       OS: linux
       ARCH: amd64
-    name: Verify @ ubuntu::${{ env.ARCH }}
+    name: Verify @ ubuntu:${{ env.ARCH }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
