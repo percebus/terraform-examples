@@ -1,5 +1,6 @@
 .bin/
+.github/
 .terraform/
 bower_components/
+dist/
 node_modules/
-terraform.*

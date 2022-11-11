@@ -14,7 +14,12 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "myTFResourceGroup"
-  location = "westus2"
+# TODO
+# resource "azurerm_resource_group" "rg" {
+#   name     = var.az_resource_group_name
+#   location = var.az_region
+# }
+
+output "message" {
+  value = var.output_message
 }

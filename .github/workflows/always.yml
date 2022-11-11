@@ -12,66 +12,11 @@ env:
 
 jobs:
   verify:
-    name: Verify @ ubuntu
     runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: ls
-        run: ls -la
-
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: setup
-        run: npm run setup:ci --if-present
-      - name: npm install
-        run: npm ci
-
-      - name: lint
-        run: npm run lint
-
-  verify-windows-amd64:
-    name: Verify @ windows:amd64
-    runs-on: windows-latest
     env:
-      OS: windows
+      OS: linux
       ARCH: amd64
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: ls
-        run: ls
-
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: setup
-        run: npm run setup:ci --if-present
-      - name: npm install
-        run: npm ci
-
-      # FIXME prettier is only failing in windows?
-      # - name: lint
-      #   run: npm run lint
-
-      # FIXME 'source' not available in windows
-      # (not cygwin)
-      # - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
-      #   run: source scripts/terraform/setup.env.sh
-      # - name: terraform init
-      #   run: terraform init
-      # - name: terraform validate
-      #   run: terraform validate
-
-  verify-macOS-amd64:
-    name: Verify @ macOS:amd64
-    runs-on: macos-latest
-    env:
-      OS: darwin
-      ARCH: amd64
+    name: Verify @ ubuntu:amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -98,12 +43,16 @@ jobs:
       # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
-
       - name: terraform validate
         run: terraform validate
-      # TODO
-      # - name: terraform plan
-      #   run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+
+      - name: terraform plan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=dist/tfplan
+      - name: Upload tfplan
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: ./dist
 
       # TODO? 200MB+ !!
       # - name: Upload .terraform
@@ -111,3 +60,73 @@ jobs:
       #   with:
       #     name: terraform-${{ env.OS }}-${{ env.ARCH }}
       #     path: .terraform
+
+  verify-macOS-amd64:
+    runs-on: macos-latest
+    env:
+      OS: darwin
+      ARCH: amd64
+    name: Verify @ macOS:amd64
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: ls
+        run: ls -la
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: setup
+        run: npm run setup:ci --if-present
+      - name: npm install
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: setup scripts @ ${{ env.OS }}:${{ env.ARCH }}
+        run: source scripts/setup.env.sh
+      - name: set PATH
+        run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
+
+      - name: terraform init
+        run: terraform init ${{ env.TF_CLI_OPTS }}
+      - name: terraform validate
+        run: terraform validate
+
+      - name: terraform plan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+
+  verify-windows-amd64:
+    runs-on: windows-latest
+    env:
+      OS: windows
+      ARCH: amd64
+    name: Verify @ windows:amd64
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: ls
+        run: ls
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: setup
+        run: npm run setup:ci --if-present
+      - name: npm install
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      # FIXME 'source' not available in windows
+      # (not cygwin)
+      # - name: setup terraform @ ${{ env.OS }}:${{ env.ARCH }}
+      #   run: source scripts/terraform/setup.env.sh
+      # - name: terraform init
+      #   run: terraform init
+      # - name: terraform validate
+      #   run: terraform validate
