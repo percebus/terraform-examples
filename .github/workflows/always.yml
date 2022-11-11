@@ -47,7 +47,6 @@ jobs:
         run: terraform validate
 
       - name: terraform plan
-      - name: terraform plan
         run: |
           mkdir -p dist
           terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
@@ -98,7 +97,6 @@ jobs:
       - name: terraform validate
         run: terraform validate
 
-      - name: terraform plan
       - name: terraform plan
         run: |
           mkdir -p dist
