@@ -47,11 +47,11 @@ jobs:
         run: terraform validate
 
       - name: terraform plan
-        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=dist/tfplan
       - name: Upload tfplan
         uses: actions/upload-artifact@v3
         with:
-          name: tfplan
+          name: dist
           path: ./dist
 
       # TODO? 200MB+ !!
