@@ -16,7 +16,7 @@ jobs:
     env:
       OS: linux
       ARCH: amd64
-    name: Verify @ ubuntu:${{ env.ARCH }}
+    name: Verify @ ubuntu:amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -68,7 +68,7 @@ jobs:
     env:
       OS: darwin
       ARCH: amd64
-    name: Verify @ macOS:${{ env.ARCH }}
+    name: Verify @ macOS:amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -107,7 +107,7 @@ jobs:
     env:
       OS: windows
       ARCH: amd64
-    name: Verify @ windows:${{ env.ARCH }}
+    name: Verify @ windows:amd64
     steps:
       - name: checkout
         uses: actions/checkout@v3
