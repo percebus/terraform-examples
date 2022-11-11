@@ -47,9 +47,7 @@ jobs:
         run: terraform validate
 
       - name: terraform plan
-        run: |
-          mkdir -p dist
-          terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
       - name: Upload tfplan
         uses: actions/upload-artifact@v3
         with:
@@ -98,9 +96,7 @@ jobs:
         run: terraform validate
 
       - name: terraform plan
-        run: |
-          mkdir -p dist
-          terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
+        run: terraform plan ${{ env.TF_CLI_OPTS }} -out=tfplan
 
   verify-windows-amd64:
     runs-on: windows-latest

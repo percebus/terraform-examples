@@ -25,7 +25,6 @@
     "terraform": "terraform",
     "terraform:init": "npm run terraform -- init -input=false",
     "postterraform:init": "npm run terraform:validate",
-    "preterraform:plan": "mkdir dist",
     "terraform:plan": "npm run terraform -- plan -out ./dist/tfplan",
     "terraform:apply": "npm run terraform -- apply",
     "terraform:destroy": "npm run terraform -- destroy",
