@@ -51,6 +51,6 @@
   },
   "homepage": "https://github.com/percebus/terraform-examples#readme",
   "devDependencies": {
-    "prettier": "latest"
+    "prettier": "^2.7.1"
   }
 }
