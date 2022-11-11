@@ -7,13 +7,16 @@
     "brew:update": "brew update",
     "brew:tap:hashicorp": "brew tap hashicorp/tap",
     "prebrew:tap:hashicorp:install": "npm run brew:update && npm run brew:tap:hashicorp",
-    "brew:tap:hashicorp:install": "brew install hashicorp/tap/terraform",
+    "brew:tap:hashicorp:install": "brew install hashicorp/tap/terraform terragrunt",
     "brew:install": "brew install azure-cli",
     "postbrew:install": "npm run brew:tap:hashicorp:install",
+    "choco:install": "choco install terragrunt",
     "npm:install:global": "npm install --location=global bower",
     "setup:ci": "npm run npm:install:global",
     "setup:osx": "npm run brew:install",
-    "prebower:install": "bower update",
+    "setup:windows": "npm run choco:install",
+    "bower:update": "bower update",
+    "prebower:install": "npm run bower:update",
     "bower:install": "bower install",
     "postinstall": "npm run bower:install",
     "terraform:fmt": "terraform fmt",
@@ -21,8 +24,13 @@
     "terraform:init": "terraform init",
     "postterraform:init": "npm run terraform:validate",
     "lint:sh": "bash scripts/bash/lint.ba.sh",
-    "style": "npm run terraform:fmt",
-    "lint": "npm run lint:sh",
+    "prettier": "prettier .",
+    "prettier:check": "npm run prettier -- --check",
+    "prettier:write": "npm run prettier -- --write",
+    "lint": "npm run prettier:check && npm run lint:sh",
+    "style": "npm run prettier:write && npm run terraform:fmt",
+    "poststyle": "npm run lint",
+    "pretest": "npm run lint",
     "test": "exit 0"
   },
   "repository": {
@@ -41,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/percebus/terraform-examples/issues"
   },
-  "homepage": "https://github.com/percebus/terraform-examples#readme"
+  "homepage": "https://github.com/percebus/terraform-examples#readme",
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
 }
