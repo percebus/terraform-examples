@@ -40,6 +40,10 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
+      - name: az login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: az
         uses: azure/CLI@v1
         with:
@@ -96,12 +100,6 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
-      - name: az
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0
-          inlineScript: az --version
-
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
       - name: terraform validate
@@ -133,12 +131,6 @@ jobs:
 
       - name: lint
         run: npm run lint
-
-      - name: az
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0
-          inlineScript: az --version
 
       # FIXME 'source' not available in windows
       # (not cygwin)
