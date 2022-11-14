@@ -1,4 +1,3 @@
-# Configure the Azure provider
 terraform {
   required_providers {
     azurerm = {
@@ -10,16 +9,10 @@ terraform {
   required_version = ">= 1.1.0"
 }
 
-provider "azurerm" {
-  features {}
+module "azure" {
+  source = "./terra/azure/centralus"
 }
 
-# TODO
-# resource "azurerm_resource_group" "rg" {
-#   name     = var.az_resource_group_name
-#   location = var.az_region
-# }
-
-output "message" {
-  value = var.output_message
+module "hello_world" {
+  source = "./terra/hello_world"
 }

@@ -3,8 +3,7 @@ ENV ARCH amd64
 ENV OS linux
 
 FROM base as go
-COPY ./docker/go /go
-WORKDIR /go/src/project
+WORKDIR /project
 COPY . .
 RUN ls -la
 ENV GOPATH /go
