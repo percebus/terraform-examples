@@ -40,7 +40,7 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
-      - name: 'az login'
+      - name: "az login"
         uses: azure/login@v1
 
       # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
@@ -93,7 +93,7 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
-      - name: 'az login'
+      - name: "az login"
         uses: azure/login@v1
 
       - name: terraform init
@@ -128,7 +128,7 @@ jobs:
       - name: lint
         run: npm run lint
 
-      - name: 'az login'
+      - name: "az login"
         uses: azure/login@v1
 
       # FIXME 'source' not available in windows
