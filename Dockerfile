@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/terraform-test:0.12.20 as base
+FROM mcr.microsoft.com/terraform-test:latest as base
 ENV ARCH amd64
 ENV OS linux
 
