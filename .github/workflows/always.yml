@@ -9,7 +9,6 @@ env:
   # TF_CLOUD_ORGANIZATION: TODO?
   # TF_CLOUD_HOSTNAME: TODO?
   TF_CLI_OPTS: "-input=false"
-  AZ_CLI_OPTS: --yes
 
 jobs:
   verify:
@@ -41,8 +40,9 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
-      - name: az upgrade
-        run: az upgrade ${AZ_CLI_OPTS}
+      - name: 'az login'
+        uses: azure/login@v1
+
       # SRC: https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
@@ -93,8 +93,9 @@ jobs:
       - name: set PATH
         run: echo "PATH=.bin:${{ env.PATH }}" >> $GITHUB_ENV
 
-      - name: az upgrade
-        run: az upgrade ${AZ_CLI_OPTS}
+      - name: 'az login'
+        uses: azure/login@v1
+
       - name: terraform init
         run: terraform init ${{ env.TF_CLI_OPTS }}
       - name: terraform validate
@@ -127,8 +128,8 @@ jobs:
       - name: lint
         run: npm run lint
 
-      - name: az upgrade
-        run: az upgrade ${AZ_CLI_OPTS}
+      - name: 'az login'
+        uses: azure/login@v1
 
       # FIXME 'source' not available in windows
       # (not cygwin)
