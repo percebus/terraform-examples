@@ -11,6 +11,7 @@ terraform {
 
 module "azure" {
   source = "./terra/azure/centralus"
+
 }
 
 module "hello_world" {
