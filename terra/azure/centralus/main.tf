@@ -6,7 +6,7 @@ terraform {
     }
   }
 
-  required_version = ">= 1.1.0"
+  required_version = ">= 0.12.0"
 }
 
 provider "azurerm" {
@@ -18,8 +18,9 @@ resource "azurerm_resource_group" "resourceGroup" {
   location = var.az_region
 }
 
+
 output "az_region" {
-  value = var.az_resource_group_name
+  value = var.az_region
 }
 
 output "az_resource_group" {
