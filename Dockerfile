@@ -12,4 +12,6 @@ ENV PATH .bin:$GOBIN:$GOPATH/bin:$PATH
 RUN /bin/bash -c "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
 
 FROM go as test
-RUN go test -v ./go/test
+# TODO lump these together
+RUN go test -v ./terra/hello_world
+RUN go test -v ./terra/

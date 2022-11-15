@@ -35,8 +35,11 @@
     "lint": "npm run prettier:check && npm run lint:sh",
     "style": "npm run prettier:write && npm run terraform:fmt",
     "poststyle": "npm run lint",
+    "docker:build": "docker build .",
+    "docker:build:default": "npm run docker:build",
+    "docker:build:test": "npm run docker:build -- target test",
     "pretest": "npm run lint",
-    "go:test": "go test -v ./go/test",
+    "go:test": "go test -v ./terra/",
     "test": "npm run go:test"
   },
   "repository": {

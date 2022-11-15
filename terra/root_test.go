@@ -11,14 +11,14 @@ import (
 func TestTerraformBasicExample(t *testing.T) {
 	t.Parallel()
 
-	output_message_expected := "Hello, terratester"
+	output_message_expected := "Hello, terratester project"
 	// expectedList := []string{expectedText}
 	// expectedMap := map[string]string{"expected": expectedText}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// website::tag::1::Set the path to the Terraform code that will be tested.
 		// The path to where our Terraform code is located
-		TerraformDir: "../../",
+		TerraformDir: "../",
 
 		// // Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{

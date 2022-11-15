@@ -4,7 +4,7 @@ terraform {
 
 
 module "hello_world" {
-  source = "./terra/hello_world"
+  source         = "./terra/hello_world"
   output_message = var.output_message
 }
 
