@@ -1,7 +1,7 @@
 
 variable "az_resource_group_name" {
   type    = string
-  default = "JCGuerrero-terraform-examples"
+  default = "JCGuerrero-terraform-examples-module"
 }
 
 # australiacentral, australiacentral2, australiaeast, australiasoutheast
